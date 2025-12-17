@@ -1,0 +1,262 @@
+openapi: 3.0.0
+info:
+  title: Book RAG Chatbot API
+  description: API for the Book RAG Chatbot that provides answers grounded in book content
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  /api/chat/send:
+    post:
+      summary: Send a message to the chatbot
+      description: Submit a query to the RAG system and receive a response based on book content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful response from the chatbot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/chat/start-conversation:
+    post:
+      summary: Start a new conversation
+      description: Initialize a new conversation session
+      responses:
+        '200':
+          description: Successfully created a new conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/chat/reset-conversation:
+    post:
+      summary: Reset the current conversation
+      description: Clear the conversation history and start fresh
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetRequest'
+      responses:
+        '200':
+          description: Successfully reset the conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/documents/index:
+    post:
+      summary: Index book content
+      description: Add book content to the vector database for RAG operations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentIndexRequest'
+      responses:
+        '200':
+          description: Successfully indexed the document
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentIndexResponse'
+        '400':
+          description: Invalid document data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - query
+        - conversation_id
+      properties:
+        query:
+          type: string
+          description: The user's question or query text
+          example: "What are the main principles of AI safety?"
+        conversation_id:
+          type: string
+          description: Unique identifier for the conversation session
+          example: "conv-12345-abcde"
+        selected_text:
+          type: string
+          description: Optional selected text that takes priority in response generation
+          example: "AI safety principles include transparency, alignment with human values, and robustness."
+
+    ChatResponse:
+      type: object
+      required:
+        - response
+        - conversation_id
+        - source_documents
+      properties:
+        response:
+          type: string
+          description: The chatbot's response based on book content
+          example: "The main principles of AI safety include transparency, alignment with human values, and robustness. According to the book..."
+        conversation_id:
+          type: string
+          description: The conversation ID this response belongs to
+          example: "conv-12345-abcde"
+        source_documents:
+          type: array
+          items:
+            type: string
+          description: IDs of the documents used to generate the response
+          example: ["doc-1", "doc-2", "doc-3"]
+        confidence_score:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Confidence level in the response accuracy
+          example: 0.85
+
+    ConversationResponse:
+      type: object
+      required:
+        - conversation_id
+        - status
+      properties:
+        conversation_id:
+          type: string
+          description: Unique identifier for the new conversation
+          example: "conv-67890-fghij"
+        status:
+          type: string
+          description: Status of the conversation creation
+          example: "started"
+
+    ResetRequest:
+      type: object
+      required:
+        - conversation_id
+      properties:
+        conversation_id:
+          type: string
+          description: Unique identifier for the conversation to reset
+          example: "conv-12345-abcde"
+
+    SuccessResponse:
+      type: object
+      required:
+        - success
+        - message
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful
+          example: true
+        message:
+          type: string
+          description: Human-readable message about the result
+          example: "Conversation reset successfully"
+
+    DocumentIndexRequest:
+      type: object
+      required:
+        - title
+        - content
+        - source_metadata
+      properties:
+        title:
+          type: string
+          description: Title of the document
+          example: "AI Safety Fundamentals"
+        content:
+          type: string
+          description: Full text content of the document to be indexed
+          example: "Chapter 1: Introduction to AI Safety..."
+        source_metadata:
+          type: object
+          description: Additional metadata about the source
+          example:
+            author: "Jane Doe"
+            publication_year: 2025
+            chapter: 1
+            page_numbers: "1-25"
+
+    DocumentIndexResponse:
+      type: object
+      required:
+        - document_id
+        - chunks_indexed
+        - status
+      properties:
+        document_id:
+          type: string
+          description: Unique identifier for the indexed document
+          example: "doc-98765-zyxwv"
+        chunks_indexed:
+          type: integer
+          description: Number of content chunks created and indexed
+          example: 42
+        status:
+          type: string
+          description: Status of the indexing operation
+          example: "completed"
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code or type
+          example: "QUERY_TOO_LONG"
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: "Query exceeds maximum length of 2000 characters"

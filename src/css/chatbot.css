@@ -1,0 +1,51 @@
+/* General styles for the chatbot component */
+
+.chatbot-container {
+  position: relative;
+}
+
+/* Ensure the chat widget doesn't interfere with page content */
+.docs-wrapper,
+.theme-doc-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Adjustments for when chat is open */
+.chat-open .main-wrapper {
+  padding-bottom: 500px; /* Make space for the chat widget */
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .chat-open .main-wrapper {
+    padding-bottom: 400px;
+  }
+}
+
+/* Extra small mobile screens */
+@media (max-width: 480px) {
+  .chat-open .main-wrapper {
+    padding-bottom: 300px;
+  }
+
+  /* Adjust the chat button position for small screens */
+  .chat-button {
+    bottom: 15px !important;
+    right: 15px !important;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .chat-open .main-wrapper {
+    padding-bottom: 350px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .chat-open .main-wrapper {
+    padding-bottom: 450px;
+  }
+}

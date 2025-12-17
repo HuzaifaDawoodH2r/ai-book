@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400">
+  <rect width="800" height="400" fill="#e3f2fd"/>
+  <text x="400" y="200" dominant-baseline="middle" text-anchor="middle" font-size="36" fill="#1976d2">Physical AI Concept Diagram</text>
+  <text x="400" y="250" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="#555">Sensors → Processing → Actuators</text>
+</svg>

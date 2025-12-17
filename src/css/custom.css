@@ -1,0 +1,532 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
+  --ifm-color-secondary: #f8fafc;
+  --ifm-color-info: #0ea5e9;
+  --ifm-color-success: #22c55e;
+  --ifm-color-warning: #f97316;
+  --ifm-color-danger: #ef4444;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-card-background-color: #ffffff;
+  --ifm-card-border-radius: 12px;
+  --ifm-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #3b82f6;
+  --ifm-color-primary-dark: #2563eb;
+  --ifm-color-primary-darker: #1d4ed8;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #60a5fa;
+  --ifm-color-primary-lighter: #93c5fd;
+  --ifm-color-primary-lightest: #bfdbfe;
+  --ifm-color-secondary: #0f172a;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-card-background-color: #1e293b;
+  --ifm-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced body styling for vibrant appearance */
+body {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+}
+
+html[data-theme='dark'] body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #e2e8f0;
+}
+
+/* Enhanced container styling */
+.container {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  max-width: 100% !important;
+}
+
+/* Vibrant interactive cards for content */
+.card {
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  border: none;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: var(--ifm-card-background-color);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+  z-index: -1;
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.card__header h3 {
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--ifm-color-primary-lightest);
+}
+
+/* Enhanced buttons with gradient effect */
+.button {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-darker));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(135deg, var(--ifm-color-primary-darker), var(--ifm-color-primary-darkest));
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+/* Enhanced code blocks with modern styling */
+.prism-code {
+  border-radius: 12px;
+  font-size: 0.9rem;
+  padding: 1.25rem;
+  background: rgba(15, 23, 42, 0.95) !important;
+  line-height: 1.6;
+  overflow: auto;
+  max-height: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced admonitions with modern styling */
+.admonition {
+  border-radius: 12px;
+  border-left: 4px solid;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.admonition--note {
+  border-left-color: var(--ifm-color-info);
+  background-color: rgba(14, 165, 233, 0.1);
+  background: linear-gradient(135deg, rgba(240, 249, 255, 0.8), rgba(239, 246, 255, 0.4));
+}
+
+.admonition--tip {
+  border-left-color: var(--ifm-color-success);
+  background-color: rgba(34, 197, 94, 0.1);
+  background: linear-gradient(135deg, rgba(240, 253, 244, 0.8), rgba(247, 254, 231, 0.4));
+}
+
+.admonition--caution {
+  border-left-color: var(--ifm-color-warning);
+  background-color: rgba(249, 115, 22, 0.1);
+  background: linear-gradient(135deg, rgba(254, 252, 232, 0.8), rgba(255, 251, 235, 0.4));
+}
+
+.admonition--danger {
+  border-left-color: var(--ifm-color-danger);
+  background-color: rgba(239, 68, 68, 0.1);
+  background: linear-gradient(135deg, rgba(254, 242, 242, 0.8), rgba(255, 245, 245, 0.4));
+}
+
+/* Enhanced sidebar with modern styling */
+.menu {
+  background-color: transparent;
+  padding: 1rem;
+}
+
+.menu__list-item-collapsible {
+  border-radius: 8px;
+  margin-bottom: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.menu__list-item-collapsible:hover {
+  background-color: rgba(37, 99, 235, 0.05);
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+.menu__link {
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  transition: all 0.2s ease;
+  margin: 0.15rem 0;
+}
+
+.menu__link--active {
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-darker));
+  color: white !important;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+}
+
+.menu__link:hover:not(.menu__link--active) {
+  background-color: rgba(37, 99, 235, 0.1);
+}
+
+/* Enhanced navigation with glassmorphism effect */
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0.8rem 0;
+}
+
+html[data-theme='dark'] .navbar {
+  background-color: rgba(15, 23, 42, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar__item,
+.navbar__link {
+  font-weight: 600;
+  color: var(--ifm-color-primary-darker);
+}
+
+html[data-theme='dark'] .navbar__item,
+html[data-theme='dark'] .navbar__link {
+  color: var(--ifm-color-primary-lighter);
+}
+
+/* Enhanced footer with vibrant gradient */
+.footer {
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-darker));
+  color: white;
+  padding-top: 4rem;
+  padding-bottom: 3rem;
+  margin-top: 4rem;
+}
+
+/* Enhanced typography with modern styling */
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.markdown h1 {
+  font-size: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--ifm-color-primary-lightest);
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-darker));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.markdown h2 {
+  font-size: 2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-darker);
+}
+
+.markdown h3 {
+  font-size: 1.6rem;
+  color: var(--ifm-color-primary);
+}
+
+/* Enhanced tables with modern styling */
+.table-wrapper {
+  overflow: auto;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.markdown table {
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background-color: var(--ifm-table-background-color);
+}
+
+.markdown table th,
+.markdown table td {
+  padding: 1rem;
+  text-align: left;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-left: none;
+  border-right: none;
+}
+
+.markdown table th {
+  background: linear-gradient(135deg, var(--ifm-color-emphasis-100), var(--ifm-color-emphasis-200));
+  font-weight: 700;
+  color: var(--ifm-color-primary-darker);
+}
+
+.markdown table tr:first-child th {
+  border-top: none;
+}
+
+.markdown table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Animated entrance for content */
+.main-wrapper {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced interactive elements for Physical AI Book */
+
+/* Exercise container styling - Now with vibrant styling */
+.card.exerciseContainer {
+  border-left: 5px solid #4c78a8;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid rgba(76, 120, 168, 0.2);
+  animation: floatEffect 4s ease-in-out infinite;
+}
+
+@keyframes floatEffect {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+html[data-theme='dark'] .card.exerciseContainer {
+  background: linear-gradient(135deg, #0c4a6e 0%, #082f49 100%);
+  border: 1px solid rgba(76, 120, 168, 0.4);
+}
+
+.card.exerciseContainer:hover {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border: 1px solid rgba(76, 120, 168, 0.3);
+  transform: scale(1.02);
+}
+
+html[data-theme='dark'] .card.exerciseContainer:hover {
+  background: linear-gradient(135deg, #082f49 0%, #0ea5e9 30%);
+}
+
+/* CodeRunner container styling - Now with vibrant styling */
+.card.codeRunner {
+  border-left: 5px solid #5c6bc0;
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+  border: 1px solid rgba(92, 107, 192, 0.2);
+  animation: floatEffect 5s ease-in-out infinite;
+}
+
+html[data-theme='dark'] .card.codeRunner {
+  background: linear-gradient(135deg, #312e81 0%, #2d3748 100%);
+  border: 1px solid rgba(92, 107, 192, 0.4);
+}
+
+.card.codeRunner:hover {
+  background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%);
+  border: 1px solid rgba(92, 107, 192, 0.3);
+  transform: scale(1.02);
+}
+
+html[data-theme='dark'] .card.codeRunner:hover {
+  background: linear-gradient(135deg, #2d3748 0%, #6366f1 30%);
+}
+
+/* Improved code block accessibility */
+.prism-code {
+  border-radius: 12px;
+  overflow: auto;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+/* Better focus indicators for accessibility */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.3);
+}
+
+/* Pulse animation for important interactive elements */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 99, 235, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+.pulse {
+  animation: pulse 3s infinite;
+}
+
+/* Custom scrollbar for better UX */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--ifm-color-primary), var(--ifm-color-primary-darker));
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--ifm-color-primary-darker), var(--ifm-color-primary-darkest));
+}
+
+html[data-theme='dark'] ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+html[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--ifm-color-primary), var(--ifm-color-primary-lighter));
+  border: 3px solid #1e293b;
+}
+
+html[data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--ifm-color-primary-lighter), var(--ifm-color-primary-lightest));
+}
+
+/* Enhanced link styling */
+.markdown a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+.markdown a:hover {
+  color: var(--ifm-color-primary-darker);
+  text-decoration: underline;
+}
+
+.markdown a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--ifm-color-primary-darker);
+  transition: width 0.3s ease;
+}
+
+.markdown a:hover::after {
+  width: 100%;
+}
+
+/* Special styling for emoji to make them pop */
+.emoji {
+  transition: transform 0.2s ease;
+}
+
+.emoji:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Enhanced quote styling */
+blockquote {
+  border-left: 5px solid var(--ifm-color-primary);
+  background-color: rgba(37, 99, 235, 0.05);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  position: relative;
+  overflow: hidden;
+}
+
+blockquote::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  font-size: 5rem;
+  color: rgba(37, 99, 235, 0.1);
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* Animation for interactive elements on hover */
+.interactive-element {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  display: inline-block;
+}
+
+.interactive-element:hover {
+  background-color: rgba(37, 99, 235, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

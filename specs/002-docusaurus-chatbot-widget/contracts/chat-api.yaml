@@ -1,0 +1,126 @@
+# API Contract: Docusaurus Chatbot Widget
+
+## Overview
+This document defines the API contract between the frontend chatbot widget and the backend service, as specified in the feature requirements. The primary endpoint is `/chat`.
+
+## Endpoints
+
+### POST /chat
+Processes user questions and returns AI-generated answers based on documentation content.
+
+#### Request
+**Content-Type**: `application/json`
+
+**Body**:
+```json
+{
+  "query": "string (the user's question)",
+  "context": {
+    "currentPageUrl": "string (the URL of the current page)",
+    "currentPageTitle": "string (the title of the current page)"
+  }
+}
+```
+
+**Example Request**:
+```json
+{
+  "query": "How do I implement a PID controller?",
+  "context": {
+    "currentPageUrl": "https://example.com/docs/physical-ai/controllers",
+    "currentPageTitle": "Controller Algorithms in Physical AI"
+  }
+}
+```
+
+#### Response
+**Success Response (200 OK)**:
+**Content-Type**: `application/json`
+
+```json
+{
+  "answer": "string (the AI-generated answer)",
+  "sourceReferences": [
+    {
+      "documentTitle": "string (title of the source document)",
+      "documentUrl": "string (URL to the source document)",
+      "section": "string (specific section within the document)",
+      "confidenceScore": "number (confidence score between 0 and 1)"
+    }
+  ]
+}
+```
+
+**Example Success Response**:
+```json
+{
+  "answer": "A PID controller is implemented by combining proportional, integral, and derivative terms...",
+  "sourceReferences": [
+    {
+      "documentTitle": "Controller Algorithms in Physical AI",
+      "documentUrl": "https://example.com/docs/physical-ai/controllers",
+      "section": "PID Implementation",
+      "confidenceScore": 0.95
+    }
+  ]
+}
+```
+
+**Error Response (500 Server Error)**:
+**Content-Type**: `application/json`
+
+```json
+{
+  "error": "string (error message)",
+  "code": "string (error code)"
+}
+```
+
+**Example Error Response**:
+```json
+{
+  "error": "Unable to process the query at this time",
+  "code": "CHAT_PROCESSING_ERROR"
+}
+```
+
+**Special Response for No Documentation Found (200 OK)**:
+**Content-Type**: `application/json`
+
+```json
+{
+  "answer": "This information is not available in the provided documentation.",
+  "sourceReferences": []
+}
+```
+
+#### Validation
+- `query` field is required and must be a non-empty string of 1-1000 characters
+- `context` field is optional but if provided, must contain both `currentPageUrl` and `currentPageTitle`
+- `currentPageUrl` must be a valid URL format
+- `currentPageTitle` must be a string of 1-200 characters
+
+#### Authentication
+- No authentication required for the `/chat` endpoint
+- Rate limiting may be implemented on the server side to prevent abuse
+
+## Error Handling
+
+### Client-Side Error Handling
+The frontend widget must handle the following scenarios:
+1. Network errors (connection timeouts, DNS issues, etc.)
+2. Server errors (5xx responses)
+3. Client errors (4xx responses)
+4. Special response: "This information is not available in the provided documentation."
+
+### Backend Error Responses
+When the backend cannot generate a response, it must return a 200 OK response with the exact text: "This information is not available in the provided documentation." as the answer, with an empty array for sourceReferences.
+
+## Performance Requirements
+- API responses should be delivered within 10 seconds
+- The endpoint should be designed to handle moderate load (up to 100 concurrent requests)
+
+## Security Considerations
+- Input sanitization must be performed on the query string
+- Output encoding should be applied to prevent XSS
+- Context information should not include sensitive data

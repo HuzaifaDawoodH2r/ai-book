@@ -1,0 +1,9 @@
+.exerciseContainer {
+  margin-bottom: 2rem;
+  border: 2px solid #4c78a8;
+  border-radius: 8px;
+}
+
+.exerciseContainer .card__body {
+  padding: 1.5rem;
+}

@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: ai-book RAG Chatbot API
+  description: API for the integrated Retrieval-Augmented Generation chatbot
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+paths:
+  /chat:
+    post:
+      summary: Process a user query and return a response
+      description: Takes a user question and optional selected text, retrieves relevant book content, and generates a response based on that content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful response with answer and sources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Bad request - missing required fields or invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Returns the health status of the service
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2025-12-15T10:30:00Z"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - question
+      properties:
+        question:
+          type: string
+          description: The user's question about the book content
+          example: "What is the main concept discussed in chapter 3?"
+        selected_text:
+          type: string
+          description: Optional text selected by the user on the page, takes precedence over vector search
+          example: "In chapter 3, the author discusses the fundamental principles of RAG systems..."
+        session_id:
+          type: string
+          description: Optional session identifier to maintain conversation context
+          format: uuid
+          example: "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+    ChatResponse:
+      type: object
+      required:
+        - response
+        - sources
+      properties:
+        response:
+          type: string
+          description: The chatbot's response to the user's question
+          example: "Chapter 3 discusses the fundamental principles of RAG systems, which combine retrieval and generation components..."
+        sources:
+          type: array
+          items:
+            type: string
+          description: List of source document IDs used to generate the response
+          example: ["doc-a1b2c3d4", "doc-e5f6g7h8"]
+        session_id:
+          type: string
+          description: Session identifier for maintaining conversation context
+          format: uuid
+          example: "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: "BAD_REQUEST"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Question field is required"
