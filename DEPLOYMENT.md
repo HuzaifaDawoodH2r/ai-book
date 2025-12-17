@@ -5,7 +5,7 @@ This document provides instructions for deploying your Docusaurus-based Physical
 ## Prerequisites
 
 1. A GitHub account
-2. A repository created for your project (e.g., `your-username/ai-book`)
+2. A repository created for your project (e.g., `HuzaifaDawoodH2r/ai-book`)
 3. Admin access to the repository settings
 
 ## Setup Instructions
@@ -18,9 +18,9 @@ In your `docusaurus.config.js`, make sure you have the correct GitHub Pages conf
 // docusaurus.config.js
 const config = {
   // ...
-  url: 'https://your-username.github.io', // Your GitHub username
-  baseUrl: '/ai-book/', // Your repository name
-  organizationName: 'your-username', // Usually your GitHub username
+  url: 'https://HuzaifaDawoodH2r.github.io', // Your GitHub username
+  baseUrl: '/', // Your repository name
+  organizationName: 'HuzaifaDawoodH2r', // Usually your GitHub username
   projectName: 'ai-book', // Repository name
   // ...
 };
@@ -56,7 +56,7 @@ After pushing your changes, you can monitor the deployment process in the "Actio
 
 ### 5. View Your Deployed Site
 
-Your site will be available at: `https://your-username.github.io/ai-book/`
+Your site will be available at: `https://HuzaifaDawoodH2r.github.io/ai-book/`
 
 **Note:** The first deployment may take a few minutes. Subsequent deployments will occur automatically after each push to the `main` branch.
 

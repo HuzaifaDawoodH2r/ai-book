@@ -13,14 +13,14 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-github-username.github.io', // Replace with your GitHub username
+  url: 'https://HuzaifaDawoodH2r".github.io', // Replace with your GitHub username
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/ai-book/', // Change this to match your repository name
+  baseUrl: '/', // Change this to match your repository name
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'your-github-username', // Usually your GitHub org/user name.
+  organizationName: 'HuzaifaDawoodH2r"', // Usually your GitHub org/user name.
   projectName: 'ai-book', // Usually your repo name. Change this to match your repository name
 
   onBrokenLinks: 'throw',
@@ -56,7 +56,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/your-username/ai-book/edit/main/',
+            'https://github.com/HuzaifaDawoodH2r/ai-book/edit/main/',
           // Options for search functionality
           beforeDefaultRemarkPlugins: [],
           beforeDefaultRehypePlugins: [],
@@ -93,7 +93,7 @@ const config = {
             label: 'Book',
           },
           {
-            href: 'https://github.com/your-username/ai-book',
+            href: 'https://github.com/HuzaifaDawoodH2r/ai-book',
             label: 'GitHub',
             position: 'right',
           },
@@ -133,7 +133,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/your-username/ai-book',
+                href: 'https://github.com/HuzaifaDawoodH2r/ai-book',
               },
             ],
           },
