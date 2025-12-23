@@ -13,7 +13,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://HuzaifaDawoodH2r".github.io', // Replace with your GitHub username
+  url: 'https://ai-book-vert-two.vercel.app/', // Replace with your GitHub username
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/', // Change this to match your repository name
